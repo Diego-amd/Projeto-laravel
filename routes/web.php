@@ -23,6 +23,12 @@ Route::get('/tickets/{id}', [TicketController::class, 'show'])->name('tickets.sh
 Route::post('/tickets', [TicketController::class, 'creation'])->name('tickets.creation'); //rota para enviar o formulário
 Route::get('/tickets', [TicketController::class, 'index'])->name('tickets.index'); //rota para retornar a listagem de tickets
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+require __DIR__.'/auth.php';
