@@ -29,9 +29,9 @@
         <select name="urgency" id="urgency" class="form-select">
             <option value="">Defina a urgência</option>
             <option value="Baixa">Baixa</option>
-            <option value="Media">Média</option>
+            <option value="Média">Média</option>
             <option value="Alta">Alta</option>
-            <option value="Gravissimo">Gravissímo</option>
+            <option value="Gravissímo">Gravissímo</option>
         </select>
     </div>
 </div>
