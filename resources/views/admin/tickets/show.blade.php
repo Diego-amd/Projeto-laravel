@@ -19,7 +19,7 @@
                 <li class="list-group-item"><strong>Imagem: </strong><br>
                     <img src="{{ url("storage/{$ticket->image}") }}" alt="{{ $ticket->title }}" style="width: 300px;">
                 </li>
-                <li class="list-group-item"><strong>status: </strong>{{ $ticket->status }}</li>
+                <li class="list-group-item"><strong>Status: </strong>{{ $ticket->status }}</li>
             </ul>
         </div>
     
@@ -32,10 +32,25 @@
                     <button type="submit" class="btn btn-danger">Apagar ticket {{ $ticket->title }}</button>
                 </form>
             </div>
-            <!-- <div class="col-2">
+            <div class="col-2">
                 <a href="{{ route('tickets.edit', $ticket->id) }}" class="btn btn-dark">Editar</a>
-            </div> -->
+            </div>
         </div>
         @endif
+        <!-- <hr> -->
+        <br>
+        <div>
+            <label for="date">Data que começou</label>
+            <input type="date" name="initialDate" id="initialDate">
+            <label for="time">Hora que começou</label>
+            <input type="time" name="initialTime" id="initialTime">
+            <br>
+            <label for="date">Data que terminou</label>
+            <input type="date" name="finalDate" id="finalDate">
+            <label for="time">Hora que terminou</label>
+            <input type="time" name="finalTime" id="finalTime">
+
+            <a href="{{ route('tickets.time') }}" class="btn btn-primary">Adicionar horas</a>
+        </div>
     </div>
 @endsection

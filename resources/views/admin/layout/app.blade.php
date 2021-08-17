@@ -20,6 +20,9 @@
                 <li class="nav-item">
                 <a class="nav-link" href="{{ route('tickets.create') }}">Criar novo ticket</a>
                 </li>
+                <li class="nav-item">
+                <a class="nav-link" href="{{ route('tickets.statistics') }}">Estatísticas</a>
+                </li>
             </ul>
             <form action="{{ route('tickets.search') }}" method="post">
             @csrf

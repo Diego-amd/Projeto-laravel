@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreationUpdatePost;
 use App\Models\ticket;
 use App\Models\User;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -107,5 +109,57 @@ class TicketController extends Controller
                             ->paginate();
 
         return view('admin.tickets.index', compact('tickets'));
+    }
+
+    public function statistics()
+    {
+        $worksId = "5f0468a0060ecb299fb5f16b";
+        $userId = "5efb6eb4d3dcea59533b428e";
+
+        $response = Http::withHeaders([
+            'X-Api-Key' => 'ZGRiYWZjMWEtMDYxZC00YzUzLWJiMDQtMTNlN2JhYTVjODFh',
+            'Accept' => 'application/json'
+        ])->GET("https://api.clockify.me/api/v1/workspaces/{$worksId}/user/{$userId}/time-entries");
+
+        $response->json();
+        $json = json_decode($response);
+        
+        $descricao = array_column($json, 'description');
+        $time = array_column($json, 'timeInterval', 'duration');
+
+        return view('admin.tickets.statistics', compact('descricao', 'time'));
+    }
+
+    public function time(Request $request)
+    {
+        $worksId = "5f0468a0060ecb299fb5f16b";
+        $requestAll = $request()->all();
+        $initialDate = $request->initialDate;
+        $initialTime = $request->initialTime;
+        $finalDate = $request->finalDate;
+        $finalTime = $request->finalTime;
+        //$initialDate = $request()->input('initial-date');
+        // $initialTime = $request()->input('initial-time');
+        // $finalDate = $request()->input('final-date');
+        // $finalTime = $request()->input('final-time');
+
+        $response = Http::withHeaders([
+            'X-Api-Key' => 'ZGRiYWZjMWEtMDYxZC00YzUzLWJiMDQtMTNlN2JhYTVjODFh',
+            'Accept' => 'application/json'
+        ])->POST("https://api.clockify.me/api/v1/workspaces/{$worksId}/time-entries",[
+                "start" => "{$initialDate}T{$initialTime}:00.000Z",
+                "billable" => "true",
+                "description" => "ticket",
+                "projectId" => null,
+                "taskId" => null,
+                "end" => "{$finalDate}T{$finalTime}:00.000Z"
+        ]);
+
+        $response->json();
+        $json = json_decode($response);
+        dd($json);
+
+        return view('admin.tickets.time', compact($json));
+
     }
 }
