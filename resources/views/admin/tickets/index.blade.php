@@ -6,7 +6,8 @@
 <div class="row" style="margin-top: 1rem;">
     <div class="col-4 bg-white" style="border-radius: 1rem; width: auto; height: 25%">
         <div class="d-flex flex-column align-items-center text-center">
-            <img src="https://img.icons8.com/material-rounded/96/000000/user-male-circle.png" alt="Avatar" class="rounded-circle" width="150">
+            <!-- <img src="https://img.icons8.com/material-rounded/96/000000/user-male-circle.png" alt="Avatar" class="rounded-circle" width="150"> -->
+            <i class="fas fa-user-circle fas fa-code fa-10x" style="margin-top: 0.25rem; color: #0691ad;"></i>
         </div>
         <div class="col-md-12" style="margin-top: 0;">
             <div class="mb-10">
@@ -43,7 +44,7 @@
         @endif
         
         <table class="table">
-            <thead class="thead-light">
+            <thead class="thead-light" style="text-align: center">
                 <th>Código</th>
                 <th>Assunto</th>
                 <th>Categoria</th>
@@ -55,7 +56,7 @@
             <tbody>
                 @foreach ($tickets as $ticket)
                 
-                <tr>
+                <tr style="text-align: center;">
                     <td>{{ $ticket->id }}</td>
                     <td>{{ $ticket->title }}</td>
                     <td>{{ $ticket->category }}</td>
@@ -69,7 +70,7 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="btn-group" style="margin-left: 43%">
+        <div class="btn-group" style="margin-left: 43%; margin-bottom: 0.50rem;">
             <a href="{{ route('tickets.create') }}" class="btn btn-dark">Criar novo ticket</a>
         </div>
     </div>

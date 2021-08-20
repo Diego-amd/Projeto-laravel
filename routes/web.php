@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 //grupo de autentição
 Route::middleware(['auth'])->group(function()
 {
-    Route::post('/tickets/time', [TicketController::class, 'time'])->name('tickets.time'); //rota para adicionar o tempo ao clockify
+    Route::any('/tickets/time', [TicketController::class, 'start'])->name('tickets.start'); //rota para adicionar o tempo ao clockify
     Route::get('/tickets/statistics', [TicketController::class, 'statistics'])->name('tickets.statistics'); //rota de estatísticas do clockify
     Route::get('/tickets/create', [TicketController::class, 'create'])->name('tickets.create'); //deve ficar em primeiro/ rota para retornar o formulário de create
     Route::any('/tickets/search', [TicketController::class, 'search'])->name('tickets.search'); //rota para buscar o ticket

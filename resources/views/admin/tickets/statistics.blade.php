@@ -8,30 +8,15 @@
 
     <div class="col">
         @foreach($descricao as $desc)
-            <strong>Descrição: </strong>{{ $desc }}<hr>
+            <strong>Descrição: </strong>{{ $desc }}
+            <hr>
         @endforeach
     </div>
     <div class="col">
         @foreach ($time as $times)
-            <strong>Tempo de duração: </strong>{{ $times->duration }}<hr>
+            <strong>Tempo de duração: </strong>{{ $times->duration }}
+            <hr>
         @endforeach
     </div>
-    
-
-    <!-- <table class="table">
-        <tbody>
-            <tr>
-                @foreach ($descricao as $desc)
-                <td><strong>Descrição: </strong>{{ $desc }}</td>
-                @endforeach
-            </tr>
-            <tr>
-                @foreach ($time as $times)
-                <td><strong>Tempo de duração: </strong>{{ $times->duration }}</td>
-                @endforeach
-            </tr>
-        </tbody>
-    </table> -->
 </div>
 @endsection
-

@@ -125,23 +125,19 @@ class TicketController extends Controller
         $json = json_decode($response);
         
         $descricao = array_column($json, 'description');
-        $time = array_column($json, 'timeInterval', 'duration');
+        $time = array_column($json,'timeInterval', 'duration');
 
         return view('admin.tickets.statistics', compact('descricao', 'time'));
     }
 
-    public function time(Request $request)
+    public function start(Request $request)
     {
         $worksId = "5f0468a0060ecb299fb5f16b";
-        $requestAll = $request()->all();
-        $initialDate = $request->initialDate;
-        $initialTime = $request->initialTime;
-        $finalDate = $request->finalDate;
-        $finalTime = $request->finalTime;
-        //$initialDate = $request()->input('initial-date');
-        // $initialTime = $request()->input('initial-time');
-        // $finalDate = $request()->input('final-date');
-        // $finalTime = $request()->input('final-time');
+        $initialDate = $request->input('initialDate');
+        $initialTime = $request->input('initialTime');
+        $finalDate = $request->input('finalDate');
+        $finalTime = $request->input('finalTime');
+        $description = $request->input('description');
 
         $response = Http::withHeaders([
             'X-Api-Key' => 'ZGRiYWZjMWEtMDYxZC00YzUzLWJiMDQtMTNlN2JhYTVjODFh',
@@ -149,7 +145,7 @@ class TicketController extends Controller
         ])->POST("https://api.clockify.me/api/v1/workspaces/{$worksId}/time-entries",[
                 "start" => "{$initialDate}T{$initialTime}:00.000Z",
                 "billable" => "true",
-                "description" => "ticket",
+                "description" => "{$description}",
                 "projectId" => null,
                 "taskId" => null,
                 "end" => "{$finalDate}T{$finalTime}:00.000Z"
@@ -157,9 +153,10 @@ class TicketController extends Controller
 
         $response->json();
         $json = json_decode($response);
-        dd($json);
 
-        return view('admin.tickets.time', compact($json));
+        return redirect()
+            ->route('tickets.index')
+            ->with('message', 'Horas adicionadas ao clockify com sucesso!');
 
     }
 }
