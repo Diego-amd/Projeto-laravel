@@ -106,7 +106,7 @@ class TicketController extends Controller
                             ->orWhere('category', 'LIKE', "%{$request->search}%")
                             ->orWhere('urgency', 'LIKE', "%{$request->search}%")
                             ->orWhere('status', 'LIKE', "%{$request->search}%")
-                            ->paginate();
+                            ->latest()->paginate();
 
         return view('admin.tickets.index', compact('tickets'));
     }

@@ -41,7 +41,7 @@
 <div class="col-md-3">
     <button type="submit" class="btn btn-success">Enviar</button>
 </div>
-<div class="col-md-4">
+<div class="col-md-4" style="margin-bottom: 1rem;">
     <select name="status" id="status" class="form-select">
         <option value="">Status do ticket</option>
         <option value="Aguardando departamento responsável">Aguardando departamento responsável</option>
